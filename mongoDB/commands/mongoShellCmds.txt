@@ -1,0 +1,94 @@
+mongo shell commands
+// show available dbs
+show dbs
+
+// shows the current db
+db
+
+// to use a different database
+use <dbname>
+
+// show help 
+help
+
+// which server you are connected to if there are multiple one
+db.getMongo();
+
+// shell invoking command
+
+// --eval
+ex: mongo server1/admin --eval 'db.runCommand({logRotate: 1})'
+note: logRotate must be issued against admin database
+can use printjson
+mongo server1/admin --eval 'printjson(db.runCommand({logRotate: 1}))'
+ 
+// run a script and return ot command prompt
+mongo server1 myscript.js
+
+// run script then get in shell: --shell
+mongo server1 myscript.js --shell
+
+// to set editor configuration to be done outside of the mongo shell
+set EDITOR='editorpath'
+
+// following can be run from the monogo command 
+pwd()
+ls()
+load(scriptname)
+
+//runtime configuration will be run whenever the shell is started
+.mongorc.js
+
+//to disable the runtime configuration
+mongo --norc
+
+show collections
+
+// allows to override the existing one
+db.collection.save()
+// doesn't allow to override the existing one
+db.collection.insert();
+db.collection.update(query, update, options)
+// update commands
+	$set, $push, $addToSet, $pull, $inc, $unset, $rename, $pop with 1 last, $pop with -1 first
+db.collection.find()
+db.collection.find().pretty();
+
+db.collection.findAndModify({
+	query: <document>,
+	update: <document>,	
+	sort: <document>,
+	fields: <document>,
+	upsert: boolean,
+	remove: boolean,
+	new : boolean
+});
+
+// finding documents
+
+db.collection.find(query[, projection])
+ex:
+db.animals.find({_id: {$in: [2,4]}})
+findOne()
+query
+	$gt,
+	$gte,
+	$lt,
+	$lte,
+	$in an array ex. $in: [1,4] return either 1 or 4 or both if present,
+	$nin an array,
+	$not,
+	$all of the array ex. $all: [1,4] return if 1 and 4 are presents
+
+cursor
+ex. db.animals.find({}) returns a cursor
+	sort()
+	limit()
+	skip()
+//indexes
+db.collection.ensureIndex(keys,options)
+now user 
+db.collection.createIndex(keys,options)
+db.system.indexes.find({ns: 'db.collection'}, {key:1})
+db.collection.dropIndex(name)
+db.collection.find().explain() //rturns the query execution and if any indexes are there or not

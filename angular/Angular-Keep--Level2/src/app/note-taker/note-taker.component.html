@@ -1,0 +1,31 @@
+<!-- Note Taker Component -->
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <mat-expansion-panel class='mx-auto' style='width: 500px'>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Take a note</mat-panel-title>
+          <mat-panel-description>
+            The description
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <form #f='ngForm'>
+          <mat-form-field>
+            <input matInput placeholder="Note" name='title' #noteName='ngModel' [(ngModel)]='note.title'>
+          </mat-form-field>
+
+          <mat-form-field>
+            <textarea matInput placeholder="Note Description" name='text' #noteTitle='ngModel' [(ngModel)]='note.text'></textarea>
+          </mat-form-field>
+
+          <mat-action-row>
+            <span>
+              <label class='error-message'>{{ errMessage }}</label>
+            </span>
+            <button mat-button color='primary' (click)='addNote(f)' [disabled]='note.text === "" || note.title === ""'>Done</button>
+          </mat-action-row>
+        </form>
+      </mat-expansion-panel>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<form #f='ngForm'>
+  <mat-form-field>
+    <input matInput placeholder="Note" name='editTitle' #noteName='ngModel' [(ngModel)]='note.title'>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Note Description" name='editText' #noteTitle='ngModel' [(ngModel)]='note.text'></textarea>
+  </mat-form-field>
+
+  <mat-action-row>
+    <span>
+      <label class='error-message'>{{ errMessage }}</label>
+    </span>
+    <button mat-button color='primary' (click)='editNote(f)'>Save</button>
+  </mat-action-row>
+</form>

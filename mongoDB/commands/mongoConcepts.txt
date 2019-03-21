@@ -1,0 +1,52 @@
+Replica set contains [provides auto recovery]
+
+Primary DB
+	- can do write
+Secondary DB[s]
+	- nowrite
+	- can readonly
+	- the data in secondary is replicated from the primary eventually [this is called eventual consistency]
+	- if primary fails one of the secondary becomes primary
+Arbiter DB
+	- if primary fails another primary is selected by election
+	- no data 
+	- to break a tie in election
+
+// create three differenct folders for datafiles
+md \data\db1
+md \data\db2
+md \data\db3
+
+// start three different instances
+Primary
+mongod --dbpath ./db1 --port 30000 --replSet "demo"
+
+Secondary
+mongod --dbpath ./db2 --port 40000 --replSet "demo"
+
+Arbiter
+mongod --dbpath ./db3 --port 50000 --replSet "demo"
+
+//create a replicaset config file
+var demoConfig = {
+	"_id" : "demo",
+	"members" : [
+		{
+			"_id" : 0,
+			"host" : "localhost:30000",
+			"priority" : 10
+		},
+		{
+			"_id" : 1,
+			"host" : "localhost:40000"			
+		},
+		{
+			"_id" : 2,
+			"host" : "localhost:50000",
+			"arbiterOnly" : true
+		}
+	]
+}
+
+// initiate the replicaset process
+rs.initiate(demoConfig)

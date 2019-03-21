@@ -1,0 +1,11 @@
+#1
+A document must have _id field
+	type included
+		int, float, string, date, object
+	type excluded []
+
+#2 
+There are very few rules
+
+#3
+Size is restricted to 16mb, for more size it should be spread across documents

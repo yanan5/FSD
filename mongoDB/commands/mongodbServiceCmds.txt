@@ -1,0 +1,18 @@
+// to install mongod as a service in windows
+mongod -f [path to config file] --install
+ex: mongod -f E:\Web\Learning\database\mongodb\mongod.conf --install
+
+// to start the service
+net start mongodb
+
+// to check if the service is running
+net start | findstr Mongo
+
+// to stop the service
+net stop mongodb
+
+// to start a mongo shell
+mongo [--port portnum]
+
+C:\Program Files\MongoDB\Server\3.2\bin\mongod.exe" -f E:\Web\Learning\mongodb\mongod.conf --service
+

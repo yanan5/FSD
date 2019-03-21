@@ -1,0 +1,13 @@
+CREATE DATABASE
+use <db-name>
+  if db-name is existed swithces to db or creates one
+
+CREATE COLLECTION
+  db.<collection-name>
+
+INSERT
+ db.products.insertMany([
+ {"item":"small box", "qty": 12},
+ {"item":"medium box", "qty": 25},
+ {"item":"very large box", "qty": 32}
+ ])
